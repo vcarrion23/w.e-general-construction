@@ -1,34 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
+import Hero from './components/Hero'
+import Services from './components/Services'
+import ContactForm from './components/ContactForm'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="min-h-screen bg-white">
+      {/* The Hero is the "Front Door" of your site */}
+      <Hero />
+      
+      {/* Services show what you are capable of */}
+      <Services />
+      
+      {/* Contact Form converts visitors into clients */}
+      <ContactForm />
+      
+      <footer className="bg-gray-900 text-white py-8 text-center">
+        <p>© 2024 W.E. General Construction. All rights reserved.</p>
+      </footer>
+    </div>
   )
 }
 
