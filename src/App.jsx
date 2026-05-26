@@ -1,41 +1,35 @@
-import React from 'react'
-import Navbar from './components/Navbar' // Make sure you have this component!
-import Hero from './components/Hero'
+import React, { useState } from 'react'
+import Navbar from './components/Navbar'
 import Services from './components/Services'
 import ContactForm from './components/ContactForm'
-import './App.css'
+import QuoteModal from './components/QuoteModal'
 
 function App() {
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+
   return (
-    /* flex-col + min-h-screen creates a professional "container" for the whole site */
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#040914] overflow-x-hidden pt-20">
+      {/* Pass down modal opener toggle into navbar controls */}
+      <Navbar onOpenQuote={() => setIsQuoteOpen(true)} />
       
-      {/* 1. Header/Navigation */}
-      <Navbar />
-      
-      {/* 2. Main Content Area: flex-grow ensures this takes up all available space */}
       <main className="flex-grow">
-        <Hero />
         <Services />
         <ContactForm />
       </main>
+
+      {/* Embedded interactive slide-over module */}
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
       
-      {/* 3. Anchored Footer: This now sits firmly at the bottom */}
-      <footer className="bg-slate-900 text-white py-12 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center opacity-80">
-          <div className="text-center md:text-left mb-4 md:mb-0">
-            <h2 className="text-lg font-bold tracking-tighter uppercase">
-              W.E. General <span className="text-blue-500">Construction</span>
-            </h2>
-            <p className="text-slate-400 text-xs mt-1 uppercase tracking-widest">Quality you can stand on.</p>
-          </div>
-          <div className="text-slate-500 text-xs text-center md:text-right">
-            <p>© 2026 W.E. Construction. All rights reserved.</p>
-            <p className="mt-1">Licensed • Bonded • Insured</p>
-          </div>
+      <footer className="bg-[#02050c] border-t border-white/5 py-14 text-center">
+        <div className="max-w-7xl mx-auto px-8 space-y-3">
+          <p className="text-xs font-bold text-white tracking-[0.3em] uppercase">
+            W.E. GENERAL CONSTRUCTION COMPANY
+          </p>
+          <p className="text-[10px] text-slate-500 uppercase tracking-[0.15em] font-medium">
+            © 2026 W.E. GENERAL • LOCAL CONTRACTING • LICENSED & INSURED
+          </p>
         </div>
       </footer>
-      
     </div>
   )
 }

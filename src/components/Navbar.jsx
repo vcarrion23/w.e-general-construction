@@ -1,74 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, HardHat } from 'lucide-react';
+import React from 'react';
+import logoImg from '../assets/logo.jpg';
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
-  return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/80 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'
-    }`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <HardHat className="text-blue-600" size={28} />
-          <span className={`font-black text-xl tracking-tighter uppercase ${
-            isScrolled ? 'text-slate-900' : 'text-slate-900' 
-          }`}>
-            W.E. <span className="text-blue-600">Construction</span>
+const Navbar = ({ onOpenQuote }) => (
+  <nav className="fixed w-full top-0 left-0 z-50 bg-[#040914]/90 backdrop-blur-xl border-b border-blue-500/10 py-4 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+    <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
+      
+      {/* Brand Cluster */}
+      <a href="#" className="flex items-center gap-4 group">
+        <div className="w-12 h-12 overflow-hidden border border-blue-500/20 bg-[#091326] p-0.5 transition-colors group-hover:border-blue-500">
+          <img src={logoImg} alt="W.E. Logo" className="w-full h-full object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
+        </div>
+        <div className="flex flex-col">
+          <span className="font-black text-xl tracking-tight uppercase text-white leading-none">
+            W.E. <span className="text-blue-500 font-light tracking-wide">GENERAL</span>
+          </span>
+          <span className="text-[8px] font-bold text-slate-500 tracking-[0.3em] uppercase mt-1">
+            CONSTRUCTION
           </span>
         </div>
+      </a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name}
-              href={link.href}
-              className="text-sm font-bold uppercase tracking-widest text-slate-600 hover:text-blue-600 transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
-          <a 
-            href="#contact" 
-            className="bg-slate-900 text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg shadow-slate-200"
-          >
-            Get a Quote
-          </a>
-        </div>
-
-        {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X /> : <Menu />}
+      {/* Navigation Options */}
+      <div className="hidden md:flex gap-12 items-center text-slate-300 font-semibold text-xs uppercase tracking-[0.2em]">
+        <a href="#services" className="hover:text-blue-400 transition-colors">Services</a>
+        <a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a>
+        <button 
+          onClick={onOpenQuote}
+          className="border border-blue-500/30 bg-blue-500/10 text-blue-400 px-6 py-2.5 font-bold tracking-[0.15em] hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(37,99,235,0.1)] cursor-pointer"
+        >
+          GET A QUOTE
         </button>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white border-t p-6 flex flex-col gap-4 md:hidden shadow-xl">
-          {navLinks.map((link) => (
-            <a key={link.name} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-slate-800">
-              {link.name}
-            </a>
-          ))}
-        </div>
-      )}
-    </nav>
-  );
-};
+      
+    </div>
+  </nav>
+);
 
 export default Navbar;
