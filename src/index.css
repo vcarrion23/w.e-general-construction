@@ -3,59 +3,59 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #040914;
+    background-color: #11141a;
   }
   body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    color: #f1f5f9;
-    background-color: #040914;
+    color: #f8fafc;
+    background-color: #11141a;
     font-family: ui-sans-serif, system-ui, sans-serif;
-    /* Ultra-smooth architectural deep navy gradient with fine technical lines */
+    /* Card-Inspired Aesthetic: Fine engineering lines over deep slate-charcoal canvas */
     background-image: 
-      linear-gradient(rgba(15, 32, 67, 0.15) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(15, 32, 67, 0.15) 1px, transparent 1px),
-      radial-gradient(circle at 50% -10%, #0a1832 0%, #040914 80%);
-    background-size: 50px 50px, 50px 50px, auto;
+      linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 50% 0%, #1a202c 0%, #11141a 80%);
+    background-size: 44px 44px, 44px 44px, auto;
     -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Premium Precision Matte Steel Panels */
-.steel-panel {
-  background: linear-gradient(145deg, #091326 0%, #050b16 100%);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-top: 1px solid rgba(59, 130, 246, 0.15);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+/* Crisp Business Card Styled Panels */
+.card-panel {
+  background: #171d26;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #38bdf8; /* The signature sky-blue geometric accent strip */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.steel-panel:hover {
-  transform: translateY(-5px);
-  border-color: rgba(59, 130, 246, 0.3);
-  border-top-color: rgba(96, 165, 250, 0.5);
-  background: linear-gradient(145deg, #0c1a33 0%, #060e1c 100%);
-  box-shadow: 
-    0 35px 70px -10px rgba(0, 0, 0, 0.85),
-    0 0 30px rgba(37, 99, 235, 0.1);
+.card-panel:hover {
+  transform: translateY(-4px);
+  background: #1c2430;
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* Scroll Animation Intersection Observer Transitions */
+/* Hide standard scrollbars for a clean mobile gallery track */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scroll Animation Transitions */
 .reveal-hidden {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: opacity, transform;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
 .reveal-visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Component Level Column Stagger Delays */
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
