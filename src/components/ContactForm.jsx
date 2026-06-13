@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, Languages, Phone, Mail, MessageSquare } from 'lucide-react';
+import { CheckCircle2, Languages, Phone, Mail, MessageSquare, Instagram } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const ContactForm = () => {
@@ -7,7 +7,7 @@ const ContactForm = () => {
     <section id="contact" className="py-32 bg-[#02050c] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         
-        {/* Left Column: Tap to Call, Text & Info Channels */}
+        {/* Left Column: Tap to Call, Text & Social Channels */}
         <div className="lg:col-span-5">
           <ScrollReveal>
             <div className="space-y-8">
@@ -18,8 +18,8 @@ const ContactForm = () => {
                 </h3>
               </div>
               
-              {/* Fully interactive phone and text lines */}
-              <div className="space-y-4 bg-[#171d26] border border-white/5 p-6 rounded-sm">
+              {/* Fully interactive connection panel */}
+              <div className="space-y-4 bg-[#171d26] border border-white/5 p-6 rounded-sm shadow-xl">
                 
                 {/* Connection Routing for Line 1 */}
                 <div className="flex items-center justify-between border-b border-white/5 pb-3">
@@ -34,7 +34,7 @@ const ContactForm = () => {
                 </div>
 
                 {/* Connection Routing for Line 2 */}
-                <div className="flex items-center justify-between pt-1">
+                <div className="flex items-center justify-between border-b border-white/5 pb-3">
                   <div className="flex items-center gap-3 text-sm font-bold text-white">
                     <Phone size={16} className="text-sky-400" />
                     <span>(914) 486-1469</span>
@@ -45,8 +45,24 @@ const ContactForm = () => {
                   </div>
                 </div>
 
+                {/* Official Instagram Link Map */}
+                <div className="flex items-center justify-between border-b border-white/5 pb-3 pt-1">
+                  <div className="flex items-center gap-3 text-sm font-bold text-white">
+                    <Instagram size={16} className="text-pink-500" />
+                    <span className="text-slate-300 font-semibold text-xs tracking-wide">@w.e_generalconstruction</span>
+                  </div>
+                  <a 
+                    href="https://www.instagram.com/w.e_generalconstruction?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-2 bg-pink-500/10 hover:bg-pink-500 text-pink-400 hover:text-white transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-wider"
+                  >
+                    View Field Reels
+                  </a>
+                </div>
+
                 {/* Email Channel */}
-                <div className="flex items-center gap-3 text-xs font-medium text-slate-400 border-t border-white/5 pt-4 mt-2">
+                <div className="flex items-center gap-3 text-xs font-medium text-slate-400 pt-1">
                   <Mail size={14} className="text-sky-400" />
                   <a href="mailto:we.generalconstructions@gmail.com" className="hover:text-sky-400 transition-colors">we.generalconstructions@gmail.com</a>
                 </div>
