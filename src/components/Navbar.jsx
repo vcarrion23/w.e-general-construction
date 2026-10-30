@@ -1,55 +1,80 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import logoImg from '../assets/logo.jpg';
+import logoImg from '../assets/logo.webp';
 
-const Navbar = ({ onOpenQuote }) => {
+const Navbar = ({ activePage, onNavigate, onOpenQuote }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => setIsScrolled(window.scrollY > 48);
+
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    return () => window.removeEventListener('scroll', updateScrollState);
+  }, []);
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-50 bg-[#11141a]/95 backdrop-blur-md border-b border-white/5 py-4 shadow-xl">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 flex justify-between items-center">
-        
-        {/* Brand Architecture Identity */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 overflow-hidden border border-sky-500/30 bg-[#171d26] p-0.5 transition-colors group-hover:border-sky-500">
-            <img src={logoImg} alt="W.E. Logo" className="w-full h-full object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-black text-lg tracking-tight uppercase text-white leading-none">
-              W.E. <span className="text-sky-400 font-light tracking-wide">GENERAL</span>
-            </span>
-            <span className="text-[7.5px] font-bold text-slate-400 tracking-[0.3em] uppercase mt-1">
-              CONSTRUCTION
-            </span>
-          </div>
+    <nav className={`site-nav fixed left-0 top-0 z-50 w-full ${isScrolled ? 'site-nav--scrolled' : ''}`}>
+      <div className="relative mx-auto flex h-full max-w-7xl items-center justify-between px-6 md:px-8">
+        <a href="#home" onClick={(event) => { event.preventDefault(); onNavigate('home'); setMenuOpen(false); }} className="site-nav__brand group" aria-label="W.E. General Construction home">
+          <img src={logoImg} alt="W.E. General Construction" className="site-nav__logo" />
         </a>
 
-        {/* Desktop Controls */}
-        <div className="hidden md:flex gap-10 items-center text-slate-300 font-semibold text-xs uppercase tracking-[0.2em]">
-          <a href="#services" className="hover:text-sky-400 transition-colors">Services</a>
-          <a href="#gallery" className="hover:text-sky-400 transition-colors">Showcase</a>
-          <a href="#contact" className="hover:text-sky-400 transition-colors">Contact</a>
-          <button onClick={onOpenQuote} className="border border-sky-500/30 bg-sky-500/10 text-sky-400 px-5 py-2 font-bold tracking-[0.15em] hover:bg-sky-400 hover:text-[#11141a] transition-all duration-300 cursor-pointer">
+        <div className={`site-nav__links flex items-center gap-5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-200 md:gap-7 md:text-xs ${isScrolled ? 'site-nav__links--visible' : ''}`}>
+          {[
+            ['home', 'Home'],
+            ['services', 'Services'],
+            ['gallery', 'Gallery'],
+            ['contact', 'Contact Us'],
+          ].map(([page, label]) => (
+            <a
+              key={page}
+              href={`#${page}`}
+              aria-current={activePage === page ? 'page' : undefined}
+              onClick={(event) => { event.preventDefault(); onNavigate(page); setMenuOpen(false); }}
+              className={`site-nav__link transition-colors hover:text-sky-300 ${activePage === page ? 'site-nav__link--active' : ''}`}
+            >
+              {label}
+            </a>
+          ))}
+          <button onClick={onOpenQuote} className="site-nav__quote cursor-pointer border border-sky-400/50 bg-sky-400 font-bold tracking-[0.12em] text-[#11141a] transition-colors hover:bg-white">
             GET A QUOTE
           </button>
         </div>
 
-        {/* Mobile Toggle Trigger */}
-        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-slate-400 hover:text-white p-1 cursor-pointer">
+        <button
+          type="button"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="site-nav__menu-button cursor-pointer p-2 text-white transition-colors hover:text-sky-300 md:hidden"
+        >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Drawer Overlay */}
       {menuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#11141a] border-b border-white/5 px-6 py-8 flex flex-col gap-5 md:hidden shadow-2xl animate-in fade-in slide-in-from-top-4 duration-200">
-          <a href="#services" onClick={() => setMenuOpen(false)} className="text-slate-300 font-bold text-sm uppercase tracking-wider hover:text-sky-400">Our Services</a>
-          <a href="#gallery" onClick={() => setMenuOpen(false)} className="text-slate-300 font-bold text-sm uppercase tracking-wider hover:text-sky-400">Project Gallery</a>
-          <a href="#contact" onClick={() => setMenuOpen(false)} className="text-slate-300 font-bold text-sm uppercase tracking-wider hover:text-sky-400">Contact Channels</a>
+        <div className="absolute left-0 top-full flex w-full flex-col gap-5 border-b border-white/10 bg-[#11141a] px-6 py-8 shadow-2xl md:hidden">
+          {[
+            ['home', 'Home'],
+            ['services', 'Services'],
+            ['gallery', 'Gallery'],
+            ['contact', 'Contact Us & Reviews'],
+          ].map(([page, label]) => (
+            <a
+              key={page}
+              href={`#${page}`}
+              onClick={(event) => { event.preventDefault(); onNavigate(page); setMenuOpen(false); }}
+              className={`text-sm font-bold uppercase tracking-wider hover:text-sky-300 ${activePage === page ? 'text-sky-300' : 'text-slate-200'}`}
+            >
+              {label}
+            </a>
+          ))}
           <div className="h-px bg-white/5 my-1" />
           <button 
             onClick={() => { setMenuOpen(false); onOpenQuote(); }}
-            className="w-full bg-sky-500 text-[#11141a] text-center font-black py-3.5 text-xs uppercase tracking-widest cursor-pointer"
+            className="w-full cursor-pointer bg-sky-400 py-3.5 text-center text-xs font-black uppercase tracking-widest text-[#11141a]"
           >
             GET A QUOTE
           </button>

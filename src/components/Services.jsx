@@ -14,14 +14,13 @@ const Services = () => (
   <section id="services" className="py-28 bg-transparent">
     <div className="max-w-7xl mx-auto px-6 md:px-8">
       
-      {/* Front of Card Tagline Layout */}
       <ScrollReveal>
-        <div className="max-w-3xl mb-20 border-l-4 border-sky-400 pl-5">
-          <p className="text-sky-400 font-black tracking-[0.3em] text-[10px] uppercase mb-2">Wilmer Erraez • General Contractor</p>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white uppercase leading-none">
-            "Give Us One Project, <br/>
-            <span className="font-light text-slate-400 lowercase italic font-serif text-3xl md:text-5xl block mt-2">We'll earn the next."</span>
+        <div className="mb-16 max-w-3xl">
+          <p className="mb-2 text-[10px] font-black uppercase tracking-[0.3em] text-sky-400">What we do</p>
+          <h2 className="text-3xl font-extrabold uppercase leading-tight tracking-tight text-white md:text-5xl">
+            Our Services
           </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400 md:text-base">From the first stone to the finishing details, we bring care and craftsmanship to every project.</p>
         </div>
       </ScrollReveal>
 
