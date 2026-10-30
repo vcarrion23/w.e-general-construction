@@ -22,6 +22,190 @@
   }
 }
 
+.site-nav {
+  height: 96px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(10, 14, 18, 0.55);
+  backdrop-filter: blur(12px);
+  transition: height 360ms cubic-bezier(0.22, 1, 0.36, 1), background-color 360ms ease, border-color 360ms ease, backdrop-filter 360ms ease, box-shadow 360ms ease;
+}
+
+.site-nav--scrolled {
+  height: 76px;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(12, 16, 20, 0.97);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.site-nav__brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.site-nav__logo {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  animation: site-nav-logo-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: width 360ms cubic-bezier(0.22, 1, 0.36, 1), height 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes site-nav-logo-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.site-nav--scrolled .site-nav__logo {
+  width: 64px;
+  height: 64px;
+}
+
+.site-nav__quote {
+  min-height: 44px;
+  padding-inline: 20px;
+  transition: min-height 360ms cubic-bezier(0.22, 1, 0.36, 1), padding 360ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms ease, background-color 200ms ease;
+}
+
+.site-nav--scrolled .site-nav__quote {
+  min-height: 38px;
+  padding-inline: 16px;
+}
+
+.site-nav__links {
+  margin-left: auto;
+  white-space: nowrap;
+  transition: gap 240ms ease;
+}
+
+.site-nav__link {
+  position: relative;
+  padding-block: 8px;
+}
+
+.site-nav__link--active::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #38bdf8;
+  content: '';
+}
+
+.page-view {
+  animation: page-view-enter 260ms ease both;
+}
+
+.hero__background {
+  animation: hero-background-drift 24s ease-in-out infinite alternate;
+}
+
+.hero__intro,
+.hero__title,
+.hero__description,
+.hero__details,
+.hero__actions,
+.hero__scroll-link {
+  animation: hero-content-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__intro { animation-delay: 80ms; }
+.hero__title { animation-delay: 180ms; }
+.hero__description { animation-delay: 280ms; }
+.hero__details { animation-delay: 360ms; }
+.hero__actions { animation-delay: 440ms; }
+.hero__scroll-link { animation-delay: 540ms; }
+
+.hero__scroll-icon {
+  animation: hero-scroll-cue 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-background-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+
+@keyframes hero-scroll-cue {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@keyframes hero-content-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes page-view-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+@media (max-width: 767px) {
+  .site-nav {
+    height: 82px;
+  }
+
+  .site-nav--scrolled {
+    height: 70px;
+  }
+
+  .site-nav__links {
+    display: none;
+  }
+
+  .site-nav__logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .site-nav--scrolled .site-nav__logo {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .site-nav__links {
+    display: none;
+  }
+
+  .site-nav__menu-button {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .site-nav__logo,
+  .site-nav__quote,
+  .site-nav__links,
+  .site-nav__menu-button,
+  .page-view,
+  .reveal-hidden,
+  .hero__content > *,
+  .hero__scroll-icon {
+    transition-duration: 0.01ms;
+    animation-duration: 0.01ms;
+  }
+
+  .hero__background,
+  .hero__scroll-icon {
+    animation: none;
+  }
+}
+
 /* Crisp Business Card Styled Panels */
 .card-panel {
   background: #171d26;
